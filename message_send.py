@@ -1,5 +1,6 @@
 import requests
 import json
+from security import safe_requests
 
 
 class MessageSend:
@@ -85,7 +86,7 @@ class MessageSend:
 
         qy_url = proxy_url or "https://qyapi.weixin.qq.com"
         get_token_url = f"{qy_url}/cgi-bin/gettoken?corpid={weCom_corpId}&corpsecret={weCom_corpSecret}"
-        resp = requests.get(get_token_url)
+        resp = safe_requests.get(get_token_url)
         resp_json = resp.json()
         if resp_json["errcode"] != 0:
             print(f"[WeCom][Get Token Response]{resp.text}")
